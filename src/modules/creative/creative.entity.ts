@@ -14,11 +14,14 @@ export class Creative {
   @Field(() => String)
   image: string;
 
-  @Field(() => String)
-  alt: string;
+  @Field(() => Boolean)
+  isSaved: boolean;
 
   @Field(() => [String])
   keywords: string[];
+
+  @Field(() => String)
+  alt: string;
 
   @Field(() => Date)
   createdAt: Date;
