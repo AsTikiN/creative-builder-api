@@ -7,7 +7,12 @@ import { ApiErrorFilter } from '@modules/error/api-error.filter';
 
 export const bootstrap = async () => {
   const app = await NestFactory.create(RootModule, {
-    cors: true,
+    cors: {
+      origin: "*", // Allow all origins
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+      allowedHeaders: "Content-Type,Accept,Authorization",
+      credentials: true,
+    },
   });
 
   app.useGlobalPipes(new ValidationPipe());
