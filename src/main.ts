@@ -7,23 +7,18 @@ import { ApiErrorFilter } from '@modules/error/api-error.filter';
 
 export const bootstrap = async () => {
   const app = await NestFactory.create(RootModule, {
-    cors: {
-      origin: "*",
-      methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-      allowedHeaders: "Content-Type,Accept,Authorization",
-      credentials: true,
-    },
+    cors: true,
   });
 
-  app.use((req, res, next) => {
-    if (
-      req.headers["x-forwarded-proto"] !== "https" &&
-      process.env.NODE_ENV === "production"
-    ) {
-      return res.redirect(`https://${req.hostname}${req.url}`);
-    }
-    next();
-  });
+  // app.use((req, res, next) => {
+  //   if (
+  //     req.headers["x-forwarded-proto"] !== "https" &&
+  //     process.env.NODE_ENV === "production"
+  //   ) {
+  //     return res.redirect(`https://${req.hostname}${req.url}`);
+  //   }
+  //   next();
+  // });
 
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new HttpExceptionFilter());
